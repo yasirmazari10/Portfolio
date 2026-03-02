@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alex Morgan | Data Analytics & AI Portfolio</title>
+  <meta name="description" content="Personal portfolio of Alex Morgan - Data Analytics, AI, and Inventory Management professional." />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --bg: #0a0a14; --bg2: #11111f; --bg3: #191930; --card: #16162a;
+      --card-border: rgba(120,80,255,0.18); --text: #e8e8f8; --text2: #a0a0c0;
+      --accent: #7c4dff; --accent2: #00d2ff; --accent3: #ff4d8d;
+      --grad1: linear-gradient(135deg,#7c4dff,#00d2ff);
+      --grad2: linear-gradient(135deg,#ff4d8d,#ff9a3c);
+      --grad3: linear-gradient(135deg,#00d2ff,#00e676);
+      --shadow: 0 8px 40px rgba(124,77,255,0.18);
+      --radius: 18px; --transition: 0.35s cubic-bezier(.4,0,.2,1);
+    }
+    [data-theme="light"] {
+      --bg:#f4f4fc; --bg2:#eaeaf6; --bg3:#ddddf0; --card:#ffffff;
+      --card-border:rgba(120,80,255,0.14); --text:#1a1a2e; --text2:#555577;
+      --shadow:0 8px 40px rgba(124,77,255,0.10);
+    }
+    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Poppins',sans-serif; background:var(--bg); color:var(--text); transition:background var(--transition),color var(--transition); overflow-x:hidden; }
+    ::-webkit-scrollbar { width:6px; }
+    ::-webkit-scrollbar-track { background:var(--bg2); }
+    ::-webkit-scrollbar-thumb { background:var(--accent); border-radius:4px; }
+
+    /* ── NAV ── */
+    nav { position:fixed; top:0; left:0; right:0; z-index:1000; display:flex; align-items:center; justify-content:space-between; padding:0 5vw; height:70px; background:rgba(10,10,20,0.82); backdrop-filter:blur(18px); border-bottom:1px solid var(--card-border); transition:background var(--transition); }
+    [data-theme="light"] nav { background:rgba(244,244,252,0.88); }
+    .nav-logo { font-size:1.4rem; font-weight:800; background:var(--grad1); -webkit-background-clip:text; -webkit-text-fill-color:transparent; letter-spacing:1px; }
+    .nav-links { display:flex; gap:2rem; list-style:none; }
+    .nav-links a { color:var(--text2); text-decoration:none; font-size:.92rem; font-weight:500; transition:color var(--transition); position:relative; }
+    .nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:2px; background:var(--grad1); transition:width var(--transition); border-radius:2px; }
+    .nav-links a:hover { color:var(--text); }
+    .nav-links a:hover::after { width:100%; }
+    .nav-right { display:flex; align-items:center; gap:1.2rem; }
+    .theme-toggle { background:var(--bg3); border:1px solid var(--card-border); color:var(--text2); width:42px; height:42px; border-radius:50%; cursor:pointer; font-size:1.1rem; display:flex; align-items:center; justify-content:center; transition:all var(--transition); }
+    .theme-toggle:hover { background:var(--accent); color:#fff; border-color:var(--accent); }
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; }
+    .hamburger span { width:24px; height:2px; background:var(--text); border-radius:2px; transition:all .3s; }
+
+    /* ── HERO ── */
+    #hero { min-height:100vh; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; padding:100px 5vw 60px; }
+    .hero-bg { position:absolute; inset:0; z-index:0; background:radial-gradient(ellipse at 20% 50%,rgba(124,77,255,0.22) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(0,210,255,0.15) 0%,transparent 55%),radial-gradient(ellipse at 60% 80%,rgba(255,77,141,0.10) 0%,transparent 55%); }
+    .hero-orbs { position:absolute; inset:0; z-index:0; pointer-events:none; }
+    .orb { position:absolute; border-radius:50%; filter:blur(80px); opacity:.35; animation:orbFloat 8s ease-in-out infinite alternate; }
+    .orb1 { width:400px; height:400px; background:var(--accent); top:-100px; left:-100px; }
+    .orb2 { width:300px; height:300px; background:var(--accent2); bottom:-80px; right:5%; animation-delay:-3s; }
+    .orb3 { width:200px; height:200px; background:var(--accent3); top:40%; right:25%; animation-delay:-5s; }
+    @keyframes orbFloat { from{transform:translateY(0) scale(1)} to{transform:translateY(-40px) scale(1.1)} }
+    .hero-content { position:relative; z-index:1; max-width:760px; }
+    .hero-badge { display:inline-flex; align-items:center; gap:.5rem; background:rgba(124,77,255,.15); border:1px solid rgba(124,77,255,.35); color:var(--accent2); font-size:.82rem; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; padding:.4rem 1.1rem; border-radius:50px; margin-bottom:1.5rem; animation:fadeInUp .8s both; }
+    .hero-badge i { animation:pulse 1.8s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+    h1.hero-name { font-size:clamp(2.8rem,6vw,5.2rem); font-weight:800; line-height:1.1; margin-bottom:.5rem; animation:fadeInUp .9s .15s both; }
+    .gradient-text { background:var(--grad1); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .hero-role { font-size:clamp(1.1rem,2.5vw,1.5rem); color:var(--text2); font-weight:400; margin-bottom:1.2rem; animation:fadeInUp .9s .3s both; }
+    .hero-role span { color:var(--accent3); font-weight:600; }
+    .hero-desc { font-size:1.05rem; color:var(--text2); max-width:560px; line-height:1.8; margin-bottom:2rem; animation:fadeInUp .9s .45s both; }
+    .hero-ctas { display:flex; gap:1rem; flex-wrap:wrap; animation:fadeInUp .9s .6s both; }
+    .btn-primary { padding:.85rem 2.2rem; border-radius:50px; font-size:1rem; font-weight:600; background:var(--grad1); color:#fff; border:none; cursor:pointer; box-shadow:0 4px 20px rgba(124,77,255,.4); transition:transform .2s,box-shadow .2s; text-decoration:none; display:inline-flex; align-items:center; gap:.5rem; }
+    .btn-primary:hover { transform:translateY(-3px); box-shadow:0 8px 30px rgba(124,77,255,.55); }
+    .btn-secondary { padding:.85rem 2.2rem; border-radius:50px; font-size:1rem; font-weight:600; background:transparent; color:var(--text); border:1.5px solid var(--card-border); cursor:pointer; transition:all .2s; text-decoration:none; display:inline-flex; align-items:center; gap:.5rem; }
+    .btn-secondary:hover { border-color:var(--accent); color:var(--accent); }
+    .hero-scroll { position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:.4rem; color:var(--text2); font-size:.78rem; animation:fadeIn 1.2s 1.2s both; text-decoration:none; }
+    .hero-scroll i { font-size:1.2rem; animation:bounce 1.5s infinite; }
+    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+    @keyframes fadeInUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    .hero-stats { display:flex; gap:2.5rem; margin-top:2.5rem; flex-wrap:wrap; animation:fadeInUp .9s .75s both; }
+    .stat { border-left:3px solid var(--accent); padding-left:1rem; }
+    .stat-num { font-size:2rem; font-weight:800; color:var(--text); line-height:1; }
+    .stat-num span { font-size:1.2rem; color:var(--accent); }
+    .stat-label { font-size:.8rem; color:var(--text2); margin-top:.2rem; }
+
+    /* ── SECTIONS ── */
+    section { padding:100px 5vw; }
+    .section-tag { display:inline-block; font-size:.78rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--accent2); background:rgba(0,210,255,.1); border:1px solid rgba(0,210,255,.25); padding:.3rem .9rem; border-radius:50px; margin-bottom:1rem; }
+    .section-title { font-size:clamp(2rem,4vw,3rem); font-weight:800; line-height:1.2; margin-bottom:1rem; }
+    .section-sub { color:var(--text2); max-width:560px; line-height:1.7; margin-bottom:3rem; }
+    .reveal { opacity:0; transform:translateY(40px); transition:opacity .7s,transform .7s; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    /* ── ABOUT ── */
+    #about { background:var(--bg2); }
+    .about-grid { display:grid; grid-template-columns:1fr 1.5fr; gap:4rem; align-items:center; }
+    .about-img-wrap { position:relative; aspect-ratio:1; max-width:380px; border-radius:var(--radius); overflow:hidden; }
+    .about-img-wrap::before { content:''; position:absolute; inset:0; background:var(--grad1); opacity:.2; z-index:1; }
+    .about-img-placeholder { width:100%; height:100%; min-height:340px; background:linear-gradient(135deg,var(--bg3) 0%,var(--card) 100%); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; color:var(--text2); }
+    .about-img-placeholder i { font-size:5rem; opacity:.4; }
+    .about-img-placeholder p { font-size:.9rem; opacity:.6; }
+    .about-deco { position:absolute; width:100%; height:100%; top:10px; left:10px; border:2px solid var(--accent); border-radius:var(--radius); z-index:-1; opacity:.4; }
+    .skills-grid { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.5rem; }
+    .skill-pill { padding:.4rem 1rem; border-radius:50px; font-size:.82rem; font-weight:600; background:var(--card); border:1px solid var(--card-border); color:var(--text2); transition:all .2s; cursor:default; }
+    .skill-pill:hover { background:var(--accent); color:#fff; border-color:var(--accent); transform:translateY(-2px); }
+    .certs { margin-top:2rem; }
+    .cert-item { display:flex; align-items:center; gap:1rem; padding:.9rem 1.2rem; background:var(--card); border:1px solid var(--card-border); border-radius:12px; margin-bottom:.7rem; transition:all .2s; }
+    .cert-item:hover { border-color:var(--accent); transform:translateX(4px); }
+    .cert-icon { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; flex-shrink:0; color:#fff; }
+    .cert-info h4 { font-size:.9rem; font-weight:600; }
+    .cert-info p { font-size:.78rem; color:var(--text2); }
+    .skill-bar-wrap { margin-bottom:1rem; }
+    .skill-bar-label { display:flex; justify-content:space-between; font-size:.83rem; color:var(--text2); margin-bottom:.3rem; }
+    .skill-bar-track { height:6px; background:var(--bg3); border-radius:4px; overflow:hidden; }
+    .skill-bar-fill { height:100%; border-radius:4px; width:0; transition:width 1.2s cubic-bezier(.4,0,.2,1); }
+
+    /* ── PROJECTS ── */
+    .projects-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:2rem; }
+    .project-card { perspective:1000px; cursor:pointer; }
+    .project-card-inner { background:var(--card); border:1px solid var(--card-border); border-radius:var(--radius); overflow:hidden; transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s; transform-style:preserve-3d; will-change:transform; }
+    .project-card-top { height:180px; display:flex; align-items:center; justify-content:center; font-size:3.5rem; position:relative; overflow:hidden; }
+    .project-card-top::after { content:''; position:absolute; inset:0; background:linear-gradient(to bottom,transparent 50%,var(--card) 100%); }
+    .project-card-body { padding:1.4rem 1.6rem 1.8rem; }
+    .project-tags { display:flex; flex-wrap:wrap; gap:.4rem; margin-bottom:.9rem; }
+    .project-tag { font-size:.72rem; font-weight:700; letter-spacing:.5px; text-transform:uppercase; padding:.2rem .65rem; border-radius:50px; background:rgba(255,255,255,.06); color:var(--text2); }
+    .project-card h3 { font-size:1.15rem; font-weight:700; margin-bottom:.5rem; }
+    .project-card p { font-size:.87rem; color:var(--text2); line-height:1.6; margin-bottom:1.2rem; }
+    .project-card-link { font-size:.85rem; font-weight:600; color:var(--accent2); text-decoration:none; display:inline-flex; align-items:center; gap:.4rem; transition:gap .2s; }
+    .project-card-link:hover { gap:.7rem; }
+    .card-c1 .project-card-top { background:linear-gradient(135deg,#2d1b69,#1a1040); }
+    .card-c1 .project-card-inner { border-top:3px solid #7c4dff; }
+    .card-c2 .project-card-top { background:linear-gradient(135deg,#003d5b,#001f2e); }
+    .card-c2 .project-card-inner { border-top:3px solid #00d2ff; }
+    .card-c3 .project-card-top { background:linear-gradient(135deg,#5b0026,#2e0013); }
+    .card-c3 .project-card-inner { border-top:3px solid #ff4d8d; }
+    .card-c4 .project-card-top { background:linear-gradient(135deg,#1a3d00,#0d2000); }
+    .card-c4 .project-card-inner { border-top:3px solid #00e676; }
+    .card-c5 .project-card-top { background:linear-gradient(135deg,#4d2600,#261300); }
+    .card-c5 .project-card-inner { border-top:3px solid #ff9a3c; }
+    .card-c6 .project-card-top { background:linear-gradient(135deg,#002040,#001020); }
+    .card-c6 .project-card-inner { border-top:3px solid #40c4ff; }
+
+    /* ── MODAL ── */
+    .modal-overlay { position:fixed; inset:0; z-index:2000; background:rgba(0,0,0,.75); backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center; padding:2rem; opacity:0; pointer-events:none; transition:opacity .3s; }
+    .modal-overlay.open { opacity:1; pointer-events:all; }
+    .modal { background:var(--bg2); border:1px solid var(--card-border); border-radius:24px; max-width:640px; width:100%; max-height:88vh; overflow-y:auto; transform:scale(.92) translateY(20px); transition:transform .35s; padding:2.5rem; position:relative; }
+    .modal-overlay.open .modal { transform:scale(1) translateY(0); }
+    .modal-close { position:absolute; top:1.2rem; right:1.4rem; width:36px; height:36px; border-radius:50%; background:var(--bg3); border:1px solid var(--card-border); color:var(--text2); cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; transition:all .2s; }
+    .modal-close:hover { background:var(--accent3); color:#fff; border-color:transparent; }
+    .modal-emoji { font-size:3rem; margin-bottom:.5rem; }
+    .modal h2 { font-size:1.6rem; font-weight:800; margin-bottom:.4rem; }
+    .modal p { color:var(--text2); line-height:1.7; margin-bottom:1rem; }
+    .modal-tech { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1rem; }
+    .modal-tech span { padding:.3rem .85rem; border-radius:50px; font-size:.8rem; font-weight:600; background:rgba(124,77,255,.15); color:var(--accent); border:1px solid rgba(124,77,255,.3); }
+    .modal-results { margin-top:1.5rem; }
+    .modal-results h4 { font-size:1rem; font-weight:700; margin-bottom:.8rem; color:var(--accent2); }
+    .result-item { display:flex; align-items:flex-start; gap:.6rem; margin-bottom:.6rem; font-size:.88rem; }
+    .result-item i { color:#00e676; margin-top:3px; flex-shrink:0; }
+
+    /* ── EXPERIENCE ── */
+    #experience { background:var(--bg2); }
+    .timeline { position:relative; padding-left:2.5rem; }
+    .timeline::before { content:''; position:absolute; left:0; top:0; bottom:0; width:2px; background:linear-gradient(to bottom,var(--accent),var(--accent2),transparent); border-radius:2px; }
+    .timeline-item { position:relative; margin-bottom:3rem; opacity:0; transform:translateX(-30px); transition:opacity .6s,transform .6s; }
+    .timeline-item.visible { opacity:1; transform:translateX(0); }
+    .timeline-dot { position:absolute; left:-2.5rem; top:.25rem; width:16px; height:16px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 4px rgba(124,77,255,.2); transform:translateX(calc(-50% + 1px)); }
+    .timeline-date { font-size:.8rem; color:var(--accent2); font-weight:600; letter-spacing:1px; text-transform:uppercase; margin-bottom:.4rem; }
+    .timeline-card { background:var(--card); border:1px solid var(--card-border); border-radius:14px; padding:1.5rem 1.8rem; transition:all .2s; }
+    .timeline-card:hover { border-color:var(--accent); box-shadow:0 4px 20px rgba(124,77,255,.1); }
+    .timeline-card h3 { font-size:1.15rem; font-weight:700; margin-bottom:.2rem; }
+    .timeline-card h4 { font-size:.9rem; color:var(--accent2); font-weight:500; margin-bottom:.8rem; }
+    .timeline-card ul { padding-left:1.2rem; }
+    .timeline-card li { font-size:.88rem; color:var(--text2); line-height:1.7; margin-bottom:.3rem; }
+    .tl-badge { display:inline-flex; align-items:center; gap:.35rem; padding:.25rem .75rem; border-radius:50px; font-size:.75rem; font-weight:700; background:rgba(124,77,255,.15); color:var(--accent); margin-bottom:.7rem; }
+
+    /* ── GALLERY ── */
+    .gallery-filters { display:flex; gap:.6rem; flex-wrap:wrap; margin-bottom:2.5rem; }
+    .filter-btn { padding:.5rem 1.3rem; border-radius:50px; font-size:.85rem; font-weight:600; background:var(--card); border:1px solid var(--card-border); color:var(--text2); cursor:pointer; transition:all .2s; }
+    .filter-btn.active,.filter-btn:hover { background:var(--accent); color:#fff; border-color:var(--accent); }
+    .gallery-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.5rem; }
+    .gallery-item { border-radius:var(--radius); overflow:hidden; aspect-ratio:16/10; position:relative; cursor:pointer; background:var(--card); transition:transform .3s,box-shadow .3s; }
+    .gallery-item:hover { transform:translateY(-6px); box-shadow:0 16px 40px rgba(0,0,0,.3); }
+    .gallery-item-inner { width:100%; height:100%; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:.8rem; font-size:2.5rem; transition:transform .4s; }
+    .gallery-item:hover .gallery-item-inner { transform:scale(1.05); }
+    .gallery-item-overlay { position:absolute; inset:0; background:rgba(10,10,20,.75); backdrop-filter:blur(4px); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.5rem; opacity:0; transition:opacity .3s; }
+    .gallery-item:hover .gallery-item-overlay { opacity:1; }
+    .gallery-item-overlay h4 { font-size:1rem; font-weight:700; color:#fff; }
+    .gallery-item-overlay p { font-size:.8rem; color:rgba(255,255,255,.7); }
+    .gallery-item[data-cat="ai"] .gallery-item-inner { background:linear-gradient(135deg,#1a0040,#000820); }
+    .gallery-item[data-cat="analytics"] .gallery-item-inner { background:linear-gradient(135deg,#001a40,#000d20); }
+    .gallery-item[data-cat="excel"] .gallery-item-inner { background:linear-gradient(135deg,#002010,#000a05); }
+    .gallery-item[data-cat="inventory"] .gallery-item-inner { background:linear-gradient(135deg,#201000,#0a0500); }
+
+    /* ── CONTACT ── */
+    #contact { background:var(--bg2); }
+    .contact-grid { display:grid; grid-template-columns:1fr 1.3fr; gap:4rem; }
+    .contact-item { display:flex; align-items:flex-start; gap:1.2rem; margin-bottom:1.8rem; }
+    .contact-icon { width:48px; height:48px; border-radius:12px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:1.2rem; color:#fff; }
+    .ci1{background:var(--grad1)} .ci2{background:var(--grad2)} .ci3{background:var(--grad3)}
+    .contact-item h4 { font-size:.9rem; font-weight:700; margin-bottom:.2rem; }
+    .contact-item p { font-size:.88rem; color:var(--text2); }
+    .form-group { position:relative; margin-bottom:1.5rem; }
+    .form-group input,.form-group textarea { width:100%; padding:1.1rem 1.2rem .5rem; background:var(--card); border:1.5px solid var(--card-border); border-radius:12px; color:var(--text); font-family:inherit; font-size:.95rem; transition:border-color .2s; outline:none; resize:vertical; }
+    .form-group textarea { min-height:130px; padding-top:1.5rem; }
+    .form-group input:focus,.form-group textarea:focus { border-color:var(--accent); }
+    .form-group label { position:absolute; left:1.2rem; top:50%; transform:translateY(-50%); font-size:.88rem; color:var(--text2); pointer-events:none; transition:all .2s; background:var(--card); padding:0 .2rem; }
+    .form-group textarea + label { top:1.1rem; transform:none; }
+    .form-group input:focus+label,.form-group input:not(:placeholder-shown)+label,.form-group textarea:focus+label,.form-group textarea:not(:placeholder-shown)+label { top:0; transform:translateY(-50%); font-size:.75rem; color:var(--accent); }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .submit-btn { width:100%; padding:1rem; border-radius:12px; font-size:1rem; font-weight:700; background:var(--grad1); color:#fff; border:none; cursor:pointer; box-shadow:0 4px 20px rgba(124,77,255,.35); transition:transform .2s,box-shadow .2s; display:flex; align-items:center; justify-content:center; gap:.6rem; }
+    .submit-btn:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(124,77,255,.5); }
+    .form-success { display:none; text-align:center; padding:2rem; background:rgba(0,230,118,.08); border:1px solid rgba(0,230,118,.2); border-radius:14px; color:#00e676; }
+    .form-success i { font-size:2.5rem; display:block; margin-bottom:.8rem; }
+
+    /* ── FOOTER ── */
+    footer { background:var(--bg); border-top:1px solid var(--card-border); padding:3rem 5vw; text-align:center; }
+    .footer-logo { font-size:1.5rem; font-weight:800; background:var(--grad1); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:1rem; display:inline-block; }
+    .social-links { display:flex; justify-content:center; gap:1rem; margin:1.2rem 0; }
+    .social-link { width:44px; height:44px; border-radius:50%; background:var(--card); border:1px solid var(--card-border); display:flex; align-items:center; justify-content:center; color:var(--text2); text-decoration:none; font-size:1.1rem; transition:all .2s; }
+    .social-link:hover { background:var(--accent); color:#fff; border-color:transparent; transform:translateY(-3px); }
+    .footer-text { font-size:.85rem; color:var(--text2); }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px) {
+      .about-grid { grid-template-columns:1fr; }
+      .contact-grid { grid-template-columns:1fr; }
+      .about-img-wrap { max-width:260px; }
+      .form-row { grid-template-columns:1fr; }
+    }
+    @media(max-width:700px) {
+      .nav-links { display:none; flex-direction:column; position:absolute; top:70px; left:0; right:0; background:var(--bg2); padding:1.5rem 5vw; border-bottom:1px solid var(--card-border); gap:1.2rem; }
+      .nav-links.open { display:flex; }
+      .hamburger { display:flex; }
+      .hero-stats { gap:1.5rem; }
+      section { padding:70px 5vw; }
+    }
+    @media(max-width:500px) {
+      .projects-grid { grid-template-columns:1fr; }
+      .gallery-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════ NAV ══════════════════ -->
+<nav role="navigation" aria-label="Main navigation">
+  <span class="nav-logo">AM<span style="color:var(--accent)">.</span></span>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <i class="fas fa-moon" id="themeIcon"></i>
+    </button>
+    <div class="hamburger" id="hamburger" role="button" aria-label="Toggle menu" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<section id="hero" aria-label="Hero section">
+  <div class="hero-bg"></div>
+  <div class="hero-orbs" aria-hidden="true">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge"><i class="fas fa-circle"></i> Available for Opportunities</div>
+    <h1 class="hero-name">Alex <span class="gradient-text">Morgan</span></h1>
+    <p class="hero-role">Data Analytics & <span>AI Specialist</span> · Inventory Intelligence</p>
+    <p class="hero-desc">Transforming raw data into actionable insights. I build intelligent systems, interactive dashboards, and AI-powered solutions that drive smarter business decisions.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary"><i class="fas fa-paper-plane"></i> Contact Me</a>
+      <a href="#" class="btn-secondary" id="cvDownload"><i class="fas fa-download"></i> Download CV</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">5<span>+</span></div><div class="stat-label">Years Experience</div></div>
+      <div class="stat"><div class="stat-num">40<span>+</span></div><div class="stat-label">Projects Done</div></div>
+      <div class="stat"><div class="stat-num">15<span>+</span></div><div class="stat-label">Clients Served</div></div>
+    </div>
+  </div>
+  <a href="#about" class="hero-scroll" aria-label="Scroll down">
+    <span>Scroll</span><i class="fas fa-chevron-down"></i>
+  </a>
+</section>
+
+<!-- ══════════════════ ABOUT ══════════════════ -->
+<section id="about" aria-label="About">
+  <div class="about-grid">
+    <div class="reveal">
+      <div class="about-img-wrap">
+        <div class="about-img-placeholder">
+          <i class="fas fa-user-circle"></i>
+          <p>Your Photo Here</p>
+        </div>
+        <div class="about-deco" aria-hidden="true"></div>
+      </div>
+    </div>
+    <div class="reveal" style="transition-delay:.15s">
+      <div class="section-tag">About Me</div>
+      <h2 class="section-title">Passionate About <span class="gradient-text">Data & AI</span></h2>
+      <p style="color:var(--text2);line-height:1.8;margin-bottom:1rem">
+        I'm a data professional with 5+ years of experience turning complex datasets into clear stories. Specializing in predictive analytics, machine learning, and inventory intelligence systems — I help organizations reduce waste, forecast demand, and automate decisions.
+      </p>
+      <p style="color:var(--text2);line-height:1.8;margin-bottom:1.5rem">
+        My toolkit spans Python, SQL, Power BI, Excel, and modern ML frameworks. I believe the best analytics work sits at the intersection of technical rigor and human intuition.
+      </p>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Python & Machine Learning</span><span>92%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="background:var(--grad1)" data-width="92"></div></div>
+      </div>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>SQL & Data Engineering</span><span>88%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="background:var(--grad3)" data-width="88"></div></div>
+      </div>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Power BI / Tableau</span><span>85%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="background:var(--grad2)" data-width="85"></div></div>
+      </div>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Excel & VBA Automation</span><span>95%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="background:linear-gradient(135deg,#00e676,#00d2ff)" data-width="95"></div></div>
+      </div>
+      <div class="skills-grid">
+        <span class="skill-pill">Pandas</span><span class="skill-pill">NumPy</span>
+        <span class="skill-pill">Scikit-Learn</span><span class="skill-pill">TensorFlow</span>
+        <span class="skill-pill">Azure ML</span><span class="skill-pill">DAX</span>
+        <span class="skill-pill">Inventory Optimization</span><span class="skill-pill">Forecasting</span>
+        <span class="skill-pill">ETL Pipelines</span><span class="skill-pill">NLP</span>
+      </div>
+      <div class="certs">
+        <div class="cert-item">
+          <div class="cert-icon" style="background:var(--grad1)"><i class="fab fa-microsoft"></i></div>
+          <div class="cert-info"><h4>Microsoft Certified: Data Analyst Associate</h4><p>Power BI · 2023</p></div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-icon" style="background:var(--grad2)"><i class="fab fa-google"></i></div>
+          <div class="cert-info"><h4>Google Professional Data Engineer</h4><p>Google Cloud · 2022</p></div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-icon" style="background:var(--grad3)"><i class="fab fa-aws"></i></div>
+          <div class="cert-info"><h4>AWS Certified Machine Learning Specialty</h4><p>Amazon Web Services · 2023</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ PROJECTS ══════════════════ -->
+<section id="projects" aria-label="Projects">
+  <div class="reveal" style="text-align:center;margin-bottom:3rem">
+    <div class="section-tag">Projects</div>
+    <h2 class="section-title">Featured <span class="gradient-text">Work</span></h2>
+    <p class="section-sub" style="margin:0 auto">A selection spanning AI, predictive analytics, and intelligent inventory systems.</p>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card card-c1 reveal" onclick="openModal('modal1')" role="button" tabindex="0" aria-label="AI Demand Forecasting Engine">
+      <div class="project-card-inner">
+        <div class="project-card-top">🤖</div>
+        <div class="project-card-body">
+          <div class="project-tags"><span class="project-tag" style="color:#a78bfa">AI</span><span class="project-tag" style="color:#7c4dff">Python</span><span class="project-tag">ML</span></div>
+          <h3>AI Demand Forecasting Engine</h3>
+          <p>LSTM-based neural network predicting inventory demand 90 days out with 94% accuracy, reducing stockouts by 37%.</p>
+          <span class="project-card-link">Explore Details <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+    </div>
+    <div class="project-card card-c2 reveal" style="transition-delay:.1s" onclick="openModal('modal2')" role="button" tabindex="0">
+      <div class="project-card-inner">
+        <div class="project-card-top">📊</div>
+        <div class="project-card-body">
+          <div class="project-tags"><span class="project-tag" style="color:#00d2ff">Power BI</span><span class="project-tag" style="color:#40c4ff">DAX</span></div>
+          <h3>Real-Time Sales Intelligence Dashboard</h3>
+          <p>End-to-end Power BI solution connecting 12 data sources, delivering live KPIs across 5 departments.</p>
+          <span class="project-card-link">Explore Details <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+    </div>
+    <div class="project-card card-c3 reveal" style="transition-delay:.2s" onclick="openModal('modal3')" role="button" tabindex="0">
+      <div class="project-card-inner">
+        <div class="project-card-top">📦</div>
+        <div class="project-card-body">
+          <div class="project-tags"><span class="project-tag" style="color:#ff4d8d">Inventory</span><span class="project-tag" style="color:#ff9a9e">Python</span></div>
+          <h3>Smart Inventory Optimization System</h3>
+          <p>Automated reorder-point calculator using EOQ, safety stock models, and lead-time variability analysis.</p>
+          <span class="project-card-link">Explore Details <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+    </div>
+    <div class="project-card card-c4 reveal" style="transition-delay:.05s" onclick="openModal('modal4')" role="button" tabindex="0">
+      <div class="project-card-inner">
+        <div class="project-card-top">💬</div>
+        <div class="project-card-body">
+          <div class="project-tags"><span class="project-tag" style="color:#00e676">NLP</span><span class="project-tag" style="color:#69f0ae">LLM</span></div>
+          <h3>Customer Sentiment NLP Analyzer</h3>
+          <p>BERT-based sentiment pipeline processing 50k+ reviews monthly, surfacing actionable product insights.</p>
+          <span class="project-card-link">Explore Details <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+    </div>
+    <div class="project-card card-c5 reveal" style="transition-delay:.15s" onclick="openModal('modal5')" role="button" tabindex="0">
+      <div class="project-card-inner">
+        <div class="project-card-top">📈</div>
+        <div class="project-card-body">
+          <div class="project-tags"><span class="project-tag" style="color:#ff9a3c">Excel</span><span class="project-tag" style="color:#ffc57a">VBA</span></div>
+          <h3>Excel Analytics Automation Suite</h3>
+          <p>VBA macros + Power Query automating 8 hours of weekly reporting into a 3-minute refresh cycle.</p>
+          <span class="project-card-link">Explore Details <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+    </div>
+    <div class="project-card card-c6 reveal" style="transition-delay:.25s" onclick="openModal('modal6')" role="button" tabindex="0">
+      <div class="project-card-inner">
+        <div class="project-card-top">🔮</div>
+        <div class="project-card-body">
+          <div class="project-tags"><span class="project-tag" style="color:#40c4ff">Predictive</span><span class="project-tag" style="color:#80d8ff">SQL</span></div>
+          <h3>Churn Prediction Model</h3>
+          <p>XGBoost model with 89% recall identifying at-risk customers 60 days before churn for proactive retention.</p>
+          <span class="project-card-link">Explore Details <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ MODALS ══════════════════ -->
+<div class="modal-overlay" id="modal1" onclick="closeModal('modal1')" role="dialog" aria-modal="true">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal('modal1')" aria-label="Close"><i class="fas fa-times"></i></button>
+    <div class="modal-emoji">🤖</div>
+    <h2>AI Demand Forecasting Engine</h2>
+    <p>End-to-end ML pipeline leveraging LSTM neural networks to predict product demand 90 days into the future. Ingests POS data, seasonal trends, promotional calendars, and economic indicators.</p>
+    <p>Deployed on Azure ML Studio with automated weekly retraining. Integrated with ERP to auto-generate purchase orders when predicted stock falls below safety thresholds.</p>
+    <div class="modal-tech"><span>Python</span><span>TensorFlow</span><span>Azure ML</span><span>SQL Server</span><span>Power BI</span><span>Docker</span></div>
+    <div class="modal-results">
+      <h4>Key Results</h4>
+      <div class="result-item"><i class="fas fa-check-circle"></i><span>94.2% forecast accuracy at SKU level over 90-day horizon</span></div>
+      <div class="result-item"><i class="fas fa-check-circle"></i><span>37% reduction in stockout events within first 6 months</span></div>
+      <div class="result-item"><i class="fas fa-check-circle"></i><span>$1.2M reduction in excess inventory carrying costs annually</span></div>
+      <div class="result-item"><i class="fas fa-check-circle"></i><span>Automated purchase orders saving 12 hours/week of manual work</span></div>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal2" onclick="closeModal('modal2')" role="dialog" aria-modal="true">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal('modal2')" aria-label="Close"><i class="fas fa-times"></i></button>
+    <div class="modal-emoji">📊</div>
+    <h2>Real-Time Sales Intelligence Dashboard</h2>
+    <p>Comprehensive Power BI solution consolidating 12 data sources including Salesforce, SAP, and SQL Server into a unified analytics layer with real-time streaming and anomaly detection alerts.</p>
+    <p>Custom DAX measures provide YoY/MoM comparisons and predictive trend lines across role-based views for executives, managers, and frontline staff.</p>
+    <div class="modal-tech"><span>Power BI</span><span>DAX</span><span>SQL Server</span><span>Salesforce</span><span>Power Query</span><span>Azure Data Factory</span></div>
+    <div class="modal-results">
+      <h4>Key Results</h4>
+      <div class="result-item"><i class="fas fa-check-circle"></i><span>Connected 12 disparate sources into single source of truth</span></div>
+      <div class="result-item"><i class="fas fa-check-circle"></i><span>Decision-making time reduced from 3 days to 30 minutes</span></div>
+      <div class="result-item"><i class="fas fa-check-circle"></i><span>150+ active users across 5 business departments</span></div>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal3" onclick="closeModal('modal3')" role="dialog" aria-modal="true">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal('modal3')" aria-label="Close"><i class="fas fa-times"></i></button>
+    <div class="modal-emoji">📦</div>
+    <h2>Smart Inventory Optimization System</h2>
+    <p>Python-based optimization engine implementing advanced EOQ models, safety stock calculations, and dynamic reorder-point algorithms across 5,000+ SKUs with lead-time variability analysis.</p>
+    <div class="modal-tech"><span>Python</span><span>Pandas</span><span>NumPy</span><span>SciPy</span><span>PostgreSQL</span><span>Airflow</span></div>
+    <div class="modal-results">
+      <h4>Key Results</h4>
+      <div class="result-item"><i class="fas fa-check-circle"></i><span>28% reduction in total inventory holding cost</span></div>
+      <div class="result-item"><i class="fas fa-check-circle"></i><span>99.2% order fill rate maintained simultaneously</span></div>
+      <div class="result-item"><i class="fas fa-check-circle"></i><span>Optimized 5,000+ SKUs across 8 warehouse locations</span></div>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal4" onclick="closeModal('modal4')" role="dialog" aria-modal="true">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal('modal4')" aria-label="Close"><i class="fas fa-times"></i></button>
+    <div class="modal-emoji">💬</div>
+    <h2>Customer Sentiment NLP Analyzer</h2>
+    <p>Fine-tuned BERT model for multi-class sentiment analysis and aspect-based opinion mining. Processes reviews from 6 platforms into a unified sentiment intelligence dashboard.</p>
+    <div class="modal-tech"><span>Python</span><span>HuggingFace</span><span>BERT</span><span>FastAPI</span><span>Elasticsearch</span><span>Kibana</span></div>
+    <div class="modal-results">
+      <h4>Key Results</h4>
+      <div class="result-item"><i class="fas fa-check-circle"></i><span>Processing 50,000+ reviews monthly fully automated</span></div>
+      <div class="result-item"><i class="fas fa-check-circle"></i><span>91.4% classification accuracy across 5 sentiment categories</span></div>
+      <div class="result-item"><i class="fas fa-check-circle"></i><span>Product team response time to issues reduced by 60%</span></div>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal5" onclick="closeModal('modal5')" role="dialog" aria-modal="true">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal('modal5')" aria-label="Close"><i class="fas fa-times"></i></button>
+    <div class="modal-emoji">📈</div>
+    <h2>Excel Analytics Automation Suite</h2>
+    <p>Comprehensive VBA macro suite and Power Query workflow automating the weekly financial reporting pack with dynamic dashboards and auto-distributed email reports with embedded charts.</p>
+    <div class="modal-tech"><span>Excel</span><span>VBA</span><span>Power Query</span><span>Power Pivot</span><span>DAX</span></div>
+    <div class="modal-results">
+      <h4>Key Results</h4>
+      <div class="result-item"><i class="fas fa-check-circle"></i><span>8 hours weekly reporting reduced to 3-minute auto-refresh</span></div>
+      <div class="result-item"><i class="fas fa-check-circle"></i><span>Zero manual errors in financial pack since deployment</span></div>
+      <div class="result-item"><i class="fas fa-check-circle"></i><span>Annual time savings of 400+ hours across the finance team</span></div>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal6" onclick="closeModal('modal6')" role="dialog" aria-modal="true">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal('modal6')" aria-label="Close"><i class="fas fa-times"></i></button>
+    <div class="modal-emoji">🔮</div>
+    <h2>Churn Prediction Model</h2>
+    <p>XGBoost-powered churn prediction using 60+ behavioral, transactional, and demographic features. Deployed as a REST API feeding a CRM intervention dashboard for the customer success team.</p>
+    <div class="modal-tech"><span>Python</span><span>XGBoost</span><span>SHAP</span><span>FastAPI</span><span>Salesforce</span><span>SQL</span></div>
+    <div class="modal-results">
+      <h4>Key Results</h4>
+      <div class="result-item"><i class="fas fa-check-circle"></i><span>89% recall identifying at-risk customers 60 days before churn</span></div>
+      <div class="result-item"><i class="fas fa-check-circle"></i><span>$800K ARR retained through proactive intervention campaigns</span></div>
+      <div class="result-item"><i class="fas fa-check-circle"></i><span>SHAP explainability layer enabling non-technical team usage</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ EXPERIENCE ══════════════════ -->
+<section id="experience" aria-label="Experience">
+  <div class="reveal" style="text-align:center;margin-bottom:3.5rem">
+    <div class="section-tag">Experience</div>
+    <h2 class="section-title">Career <span class="gradient-text">Journey</span></h2>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">Jan 2023 – Present</div>
+      <div class="timeline-card">
+        <span class="tl-badge"><i class="fas fa-circle" style="font-size:.5rem"></i> Current Role</span>
+        <h3>Senior Data & AI Analyst</h3>
+        <h4>TechCorp Global · Full-time</h4>
+        <ul>
+          <li>Lead a team of 4 analysts delivering ML-powered forecasting for $500M supply chain</li>
+          <li>Architected Azure ML pipelines processing 2TB of transaction data daily</li>
+          <li>Reduced inventory discrepancies by 42% through real-time anomaly detection</li>
+        </ul>
+      </div>
+    </div>
+    <div class="timeline-item" style="transition-delay:.15s">
+      <div class="timeline-dot" style="background:var(--accent2)"></div>
+      <div class="timeline-date">Jun 2021 – Dec 2022</div>
+      <div class="timeline-card">
+        <h3>Data Analytics Engineer</h3>
+        <h4>RetailEdge Inc. · Full-time</h4>
+        <ul>
+          <li>Built Power BI suite serving 200+ users across global retail network</li>
+          <li>Implemented demand forecasting reducing markdown losses by $3.2M annually</li>
+          <li>Designed ETL pipelines integrating 8 data sources with 99.8% uptime SLA</li>
+        </ul>
+      </div>
+    </div>
+    <div class="timeline-item" style="transition-delay:.3s">
+      <div class="timeline-dot" style="background:var(--accent3)"></div>
+      <div class="timeline-date">Mar 2020 – May 2021</div>
+      <div class="timeline-card">
+        <h3>Business Intelligence Analyst</h3>
+        <h4>Logistics Pro · Full-time</h4>
+        <ul>
+          <li>Developed Excel automation suite saving 15 hours per week of manual reporting</li>
+          <li>Created SQL-driven inventory dashboards tracking 10,000+ product lines</li>
+          <li>Optimized warehouse layout using heatmap analytics in collaboration with ops team</li>
+        </ul>
+      </div>
+    </div>
+    <div class="timeline-item" style="transition-delay:.45s">
+      <div class="timeline-dot" style="background:#00e676"></div>
+      <div class="timeline-date">2016 – 2020</div>
+      <div class="timeline-card">
+        <h3>BSc Data Science & Business Analytics</h3>
+        <h4>University of Technology · First Class Honours</h4>
+        <ul>
+          <li>Graduated with distinction; thesis on ML applications in supply chain optimization</li>
+          <li>Led university data science society, organizing workshops for 300+ students</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ GALLERY ══════════════════ -->
+<section id="gallery" aria-label="Gallery" style="background:var(--bg2)">
+  <div class="reveal" style="text-align:center;margin-bottom:1rem">
+    <div class="section-tag">Gallery</div>
+    <h2 class="section-title">Work <span class="gradient-text">Showcase</span></h2>
+    <p class="section-sub" style="margin:0 auto 2rem">Dashboards, AI visualizations, and analytics outputs from recent projects.</p>
+  </div>
+  <div class="gallery-filters reveal">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="ai">AI / ML</button>
+    <button class="filter-btn" data-filter="analytics">Analytics</button>
+    <button class="filter-btn" data-filter="excel">Excel</button>
+    <button class="filter-btn" data-filter="inventory">Inventory</button>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item reveal" data-cat="ai">
+      <div class="gallery-item-inner">🧠<span style="font-size:.85rem;color:var(--text2)">Neural Network Viz</span></div>
+      <div class="gallery-item-overlay"><h4>Demand Forecast Model</h4><p>LSTM Architecture · Azure ML</p></div>
+    </div>
+    <div class="gallery-item reveal" style="transition-delay:.08s" data-cat="analytics">
+      <div class="gallery-item-inner">📊<span style="font-size:.85rem;color:var(--text2)">Sales Dashboard</span></div>
+      <div class="gallery-item-overlay"><h4>Sales Intelligence Board</h4><p>Power BI · 12 Data Sources</p></div>
+    </div>
+    <div class="gallery-item reveal" style="transition-delay:.16s" data-cat="excel">
+      <div class="gallery-item-inner">📋<span style="font-size:.85rem;color:var(--text2)">Excel Automation</span></div>
+      <div class="gallery-item-overlay"><h4>Financial Reporting Suite</h4><p>Excel + VBA · Auto-Reports</p></div>
+    </div>
+    <div class="gallery-item reveal" style="transition-delay:.24s" data-cat="inventory">
+      <div class="gallery-item-inner">📦<span style="font-size:.85rem;color:var(--text2)">Inventory Map</span></div>
+      <div class="gallery-item-overlay"><h4>Warehouse Heatmap</h4><p>Python · Plotly · 5,000 SKUs</p></div>
+    </div>
+    <div class="gallery-item reveal" style="transition-delay:.1s" data-cat="ai">
+      <div class="gallery-item-inner">🔬<span style="font-size:.85rem;color:var(--text2)">NLP Pipeline</span></div>
+      <div class="gallery-item-overlay"><h4>Sentiment Analysis Flow</h4><p>BERT · HuggingFace</p></div>
+    </div>
+    <div class="gallery-item reveal" style="transition-delay:.18s" data-cat="analytics">
+      <div class="gallery-item-inner">📉<span style="font-size:.85rem;color:var(--text2)">Churn Analytics</span></div>
+      <div class="gallery-item-overlay"><h4>Churn Risk Dashboard</h4><p>XGBoost · SHAP Values</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ CONTACT ══════════════════ -->
+<section id="contact" aria-label="Contact">
+  <div class="reveal" style="text-align:center;margin-bottom:3rem">
+    <div class="section-tag">Contact</div>
+    <h2 class="section-title">Let's <span class="gradient-text">Connect</span></h2>
+    <p class="section-sub" style="margin:0 auto">Have a project in mind or want to discuss data challenges? Reach out — I'd love to hear from you.</p>
+  </div>
+  <div class="contact-grid">
+    <div class="reveal">
+      <div class="contact-item">
+        <div class="contact-icon ci1"><i class="fas fa-envelope"></i></div>
+        <div><h4>Email</h4><p>alex.morgan@email.com</p></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon ci2"><i class="fab fa-linkedin"></i></div>
+        <div><h4>LinkedIn</h4><p>linkedin.com/in/alexmorgan-data</p></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon ci3"><i class="fab fa-github"></i></div>
+        <div><h4>GitHub</h4><p>github.com/alexmorgan-ai</p></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon" style="background:linear-gradient(135deg,#ff9a3c,#ff4d8d)"><i class="fas fa-map-marker-alt"></i></div>
+        <div><h4>Location</h4><p>New York, NY · Open to Remote</p></div>
+      </div>
+    </div>
+    <div class="reveal" style="transition-delay:.15s">
+      <div id="contactForm">
+        <div class="form-row">
+          <div class="form-group">
+            <input type="text" id="fname" placeholder=" " aria-label="First name" />
+            <label for="fname">First Name</label>
+          </div>
+          <div class="form-group">
+            <input type="text" id="lname" placeholder=" " aria-label="Last name" />
+            <label for="lname">Last Name</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="email" id="cemail" placeholder=" " aria-label="Email address" />
+          <label for="cemail">Email Address</label>
+        </div>
+        <div class="form-group">
+          <input type="text" id="subject" placeholder=" " aria-label="Subject" />
+          <label for="subject">Subject</label>
+        </div>
+        <div class="form-group">
+          <textarea id="message" placeholder=" " aria-label="Message"></textarea>
+          <label for="message">Message</label>
+        </div>
+        <button class="submit-btn" onclick="handleSubmit()" type="button">
+          <i class="fas fa-paper-plane"></i> Send Message
+        </button>
+      </div>
+      <div class="form-success" id="formSuccess">
+        <i class="fas fa-check-circle"></i>
+        <strong>Message Sent!</strong><br>
+        <span style="font-size:.9rem;color:var(--text2)">Thanks for reaching out. I'll get back to you within 24 hours.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer>
+  <div class="footer-logo">Alex Morgan</div>
+  <p style="color:var(--text2);font-size:.9rem;max-width:420px;margin:0 auto .5rem">
+    Turning data into decisions. Building AI that matters.
+  </p>
+  <div class="social-links">
+    <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+    <a href="#" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+    <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+    <a href="#" class="social-link" aria-label="Kaggle"><i class="fab fa-kaggle"></i></a>
+    <a href="#" class="social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
+  </div>
+  <p class="footer-text">© 2024 Alex Morgan · All rights reserved · Built with passion & data.</p>
+</footer>
+
+<!-- ══════════════════ JAVASCRIPT ══════════════════ -->
+<script>
+  /* ── Theme Toggle ── */
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon   = document.getElementById('themeIcon');
+  const html        = document.documentElement;
+  themeToggle.addEventListener('click', () => {
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+  });
+
+  /* ── Hamburger Menu ── */
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  hamburger.addEventListener('keydown', e => { if (e.key === 'Enter') navLinks.classList.toggle('open'); });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  /* ── Scroll Reveal + Skill Bars ── */
+  const reveals       = document.querySelectorAll('.reveal');
+  const timelineItems = document.querySelectorAll('.timeline-item');
+  const skillBars     = document.querySelectorAll('.skill-bar-fill');
+  let barsAnimated = false;
+
+  function onScroll() {
+    const trigger = window.innerHeight * 0.88;
+    reveals.forEach(el => {
+      if (el.getBoundingClientRect().top < trigger) el.classList.add('visible');
+    });
+    timelineItems.forEach(el => {
+      if (el.getBoundingClientRect().top < trigger) el.classList.add('visible');
+    });
+    if (!barsAnimated) {
+      skillBars.forEach(bar => {
+        if (bar.getBoundingClientRect().top < trigger) {
+          barsAnimated = true;
+          skillBars.forEach(b => { b.style.width = b.getAttribute('data-width') + '%'; });
+        }
+      });
+    }
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+
+  /* ── 3D Card Tilt ── */
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width  - 0.5;
+      const y = (e.clientY - rect.top)  / rect.height - 0.5;
+      card.querySelector('.project-card-inner').style.transform =
+        `translateY(-10px) rotateX(${-y * 10}deg) rotateY(${x * 10}deg)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.querySelector('.project-card-inner').style.transform = '';
+    });
+    card.addEventListener('keydown', e => { if (e.key === 'Enter') card.click(); });
+  });
+
+  /* ── Gallery Filters ── */
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.getAttribute('data-filter');
+      document.querySelectorAll('.gallery-item').forEach(item => {
+        item.style.display = (filter === 'all' || item.getAttribute('data-cat') === filter) ? '' : 'none';
+      });
+    });
+  });
+
+  /* ── Modals ── */
+  function openModal(id) {
+    document.getElementById(id).classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.open').forEach(m => {
+        m.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    }
+  });
+
+  /* ── Contact Form ── */
+  function handleSubmit() {
+    const fname   = document.getElementById('fname').value.trim();
+    const email   = document.getElementById('cemail').value.trim();
+    const message = document.getElementById('message').value.trim();
+    if (!fname || !email || !message) {
+      alert('Please fill in your name, email, and message.');
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+
+  /* ── CV Download (generates placeholder if no real file) ── */
+  document.getElementById('cvDownload').addEventListener('click', function(e) {
+    // Replace the href below with the actual path to your CV PDF:
+    // this.href = 'assets/Alex_Morgan_CV.pdf';
+    // For now, shows a friendly alert:
+    e.preventDefault();
+    alert('📄 To enable CV download:\n\n1. Save your CV as "Alex_Morgan_CV.pdf"\n2. Place it in the same folder as this HTML file\n3. Change the cvDownload href to "Alex_Morgan_CV.pdf"');
+  });
+
+  /* ── Active Nav Highlight on Scroll ── */
+  const sections   = document.querySelectorAll('section[id]');
+  const navAnchors = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
+    });
+    navAnchors.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--text)' : '';
+    });
+  });
+</script>
+</body>
+</html>
